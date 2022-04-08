@@ -7,8 +7,6 @@ export default createGlobalStyle`
     --color-illustration-secondary: hsl(163, 29%, 75%);
     --color-element-background: hsl(177, 100%, 14%);
     --color-element-headline: hsl(60, 100%, 100%);
-    --color-element-paragraph: hsl(163, 29%, 75%);
-    --color-element-button: hsl(36, 93%, 68%);
     --color-element-buttontext: hsl(178, 100%, 6%);
 }
 
