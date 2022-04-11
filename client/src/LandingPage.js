@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
+import Header from "./Components/Header";
 const LandingPage = () => {
 	return (
 		<>
+			<Header />
 			<Main></Main>
 		</>
 	);
@@ -19,7 +21,7 @@ const gradientAnimation = keyframes`
 
 const Main = styled.div`
 	background-color: var(--color-illustration-secondary);
-	height: 100vh;
+	height: 85vh;
 `;
 
 export default LandingPage;
