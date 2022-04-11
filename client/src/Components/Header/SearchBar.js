@@ -1,8 +1,6 @@
-import { keyframes } from "styled-components";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const SearchBar = () => {
 	const handleClick = () => {
 		const search = document.querySelector(".search");
 		search.classList.toggle("active");
@@ -12,87 +10,22 @@ const Header = () => {
 		let searchField = document.querySelector(".search-field");
 		searchField.value = "";
 	};
+
 	return (
-		<GradientDiv>
-			<LogoSearchWrapper>
-				<NavLink to="/">
-					<h1>Twinema</h1>
-				</NavLink>
-				<SearchBar className="search">
-					<div onClick={handleClick} className="search-icon"></div>
-					<div className="search-input">
-						<input
-							className="search-field"
-							placeholder="Search Here"
-						></input>
-						<span onClick={handleClear}></span>
-					</div>
-				</SearchBar>
-			</LogoSearchWrapper>
-		</GradientDiv>
+		<Search className="search">
+			<div onClick={handleClick} className="search-icon"></div>
+			<div className="search-input">
+				<input
+					className="search-field"
+					placeholder="Search Here"
+				></input>
+				<span onClick={handleClear}></span>
+			</div>
+		</Search>
 	);
 };
-const gradientAnimation = keyframes`
-0% {
-    background-position: left;
-}
-100% {
-    background-position: right;
-}
-`;
 
-const GradientDiv = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-	height: 115px;
-	padding: 20px 0 0 20px;
-	background-image: linear-gradient(
-		45deg,
-		var(--color-illustration-highlight),
-		var(--color-illustration-tertiary)
-	);
-	background-size: 300%;
-	background-position: left;
-	animation: ${gradientAnimation} 14s infinite alternate;
-
-	h1 {
-		color: var(--color-element-headline);
-		font-size: 30px;
-		top: 0;
-		left: 0;
-		opacity: 0.8;
-		cursor: pointer;
-		padding: 0 20px 0 0;
-
-		&:hover {
-			opacity: 1;
-			transition: 0.5s;
-		}
-	}
-`;
-
-const LogoSearchWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	width: 500px;
-	height: 30px;
-	margin-top: -20px;
-	padding: 10px;
-
-	.search {
-		width: 30px;
-	}
-
-	.search.active {
-		width: 400px;
-		opacity: 1;
-	}
-`;
-
-const SearchBar = styled.div`
+const Search = styled.div`
 	position: relative;
 	height: 30px;
 	background: var(--color-element-headline);
@@ -189,4 +122,4 @@ const SearchBar = styled.div`
 		transform: rotate(315deg);
 	}
 `;
-export default Header;
+export default SearchBar;
