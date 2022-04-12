@@ -19,9 +19,9 @@ const gradientAnimation = keyframes`
 }
 `;
 
-const Main = styled.div`
+export const Main = styled.div`
 	background-color: var(--color-illustration-secondary);
-	height: 85vh;
+	height: 100%;
 `;
 
 export default LandingPage;

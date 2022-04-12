@@ -9,7 +9,7 @@ const Header = () => {
 		<>
 			<GradientDiv>
 				<LogoSearchWrapper>
-					<NavLink to="/">
+					<NavLink to="/home">
 						<h1>Twinema</h1>
 					</NavLink>
 					<SearchBar />
