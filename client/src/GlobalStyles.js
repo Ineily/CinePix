@@ -34,6 +34,7 @@ html, body, div, span, applet, object, iframe,
 
   body {
       line-height: 1;
+      background: var(--color-illustration-secondary)
   }
   ol, ul {
       list-style: none;

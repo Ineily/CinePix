@@ -6,10 +6,7 @@ const ProfilePreview = () => {
 	return (
 		<PreviewDiv>
 			<PicDiv>
-				<PreviewProfPic
-					alt="Profile Photo"
-					src={profpic}
-				></PreviewProfPic>
+				<PreviewProfPic alt="Profile Photo" src={profpic} />
 			</PicDiv>
 			<FollowDiv>
 				<p>Followers</p>
@@ -67,12 +64,13 @@ const PreviewDiv = styled.div`
 	height: max-content;
 	background: var(--color-element-background);
 	justify-content: flex-start;
-	margin: 100px 50px;
+	margin: 80px 50px;
 	border-radius: 20px;
 	box-shadow: 2px 5px 16px 0px var(--color-element-background);
 	padding: 30px;
+	position: fixed;
 `;
-const PicDiv = styled.div`
+export const PicDiv = styled.div`
 	width: 100px;
 	overflow: hidden;
 	height: 100px;
@@ -80,7 +78,7 @@ const PicDiv = styled.div`
 	margin-top: -75px;
 	border: 3px solid var(--color-illustration-secondary);
 `;
-const PreviewProfPic = styled.img`
+export const PreviewProfPic = styled.img`
 	width: 100px;
 `;
 
@@ -192,7 +190,8 @@ const RecentPick = styled.div`
 		width: 100%;
 		height: max-content;
 		background: var(--color-element-headline);
-		padding: 10px;
+		color: var(--color-element-background);
+		padding: 15px;
 		border-radius: 10px;
 		margin-top: 10px;
 	}
