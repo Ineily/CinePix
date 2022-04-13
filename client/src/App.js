@@ -26,6 +26,9 @@ function App() {
 				<Route exact path="/browse">
 					<Browse />
 				</Route>
+				<Route path="">
+					<div>404 - This is not what you're looking for</div>
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);
