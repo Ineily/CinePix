@@ -21,9 +21,7 @@ const Nav = () => {
 			</DropdownNotiWrap>
 			<DropdownProfWrap>
 				<ProfWrap>
-					<Profdiv>
-						<ProfilePic src={imgsrc} alt="Profile Picture" />
-					</Profdiv>
+					<ProfilePic src={imgsrc} alt="Profile Picture" />
 					<StyledBsCD />
 				</ProfWrap>
 				<DropdownProfDiv className="hover">
@@ -71,13 +69,9 @@ const BrowseNotSetNav = styled.nav`
 	margin-top: -20px;
 `;
 
-const Profdiv = styled.div`
-	height: 70px;
-	border-radius: 50%;
-	overflow: hidden;
-`;
 const ProfilePic = styled.img`
-	width: 60px;
+	border-radius: 50%;
+	width: 70px;
 `;
 const BrowseWrap = styled.div`
 	display: flex;
@@ -108,7 +102,6 @@ const DropdownProfWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* margin-top: 10px; */
 	position: relative;
 	&:hover {
 		margin-top: 161px;

@@ -21,7 +21,8 @@ const gradientAnimation = keyframes`
 
 export const Main = styled.div`
 	background-color: var(--color-illustration-secondary);
-	height: 100%;
+	height: max-content;
+	display: flex;
 `;
 
 export default LandingPage;
