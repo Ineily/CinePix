@@ -15,42 +15,39 @@ const SuggestedFriendGrid = () => {
 				<SugFriendWrap>
 					<img
 						alt="Suggested Friend"
-						src="../../public/assets/Cheryl-Payne.jpg"
+						src="/assets/Cheryl-Payne.jpg"
 					/>
 					<p>Cheryl Payne</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
 					<img
 						alt="Suggested Friend"
-						src="../../public/assets/Jackie-McIlwaine.jpg"
+						src="/assets/Jackie-McIlwaine.jpg"
 					/>
 					<p>Jackie McIlwaine</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
 					<img
 						alt="Suggested Friend"
-						src="../../public/assets/Joseph-Gonzalez.jpg"
+						src="/assets/Joseph-Gonzalez.jpg"
 					/>
 					<p>Joseph Gonzalez</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img
-						alt="Suggested Friend"
-						src="../../public/assets/Max-Mutinda.jpg"
-					/>
+					<img alt="Suggested Friend" src="/assets/Max-Mutinda.jpg" />
 					<p>Max Mutinda</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
 					<img
 						alt="Suggested Friend"
-						src="../../public/assets/Rebecca-Shephard.jpg"
+						src="/assets/Rebecca-Shephard.jpg"
 					/>
 					<p>Rebecca Shephard</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
 					<img
 						alt="Suggested Friend"
-						src="../../public/assets/Trent-Alexander.jpg"
+						src="/assets/Trent-Alexander.jpg"
 					/>
 					<p>Trent Alexander</p>
 				</SugFriendWrap>

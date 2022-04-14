@@ -6,7 +6,7 @@ const ReviewPreview = () => {
 			<PicDiv className="profile">
 				<PreviewProfPic
 					alt="Profile Picture"
-					src="../../public/assets/Kay-Bridges.jpg"
+					src="/assets/Kay-Bridges.jpg"
 				/>
 			</PicDiv>
 			<PreviewReviewWrap>

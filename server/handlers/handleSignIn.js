@@ -17,7 +17,7 @@ const handleSignIn = async (req, res) => {
 		await client.connect();
 		const result = await db
 			.collection("users")
-			.findOne({ username: userName, password: password });
+			.findOne({ username: `${userName}`, password: `${password}` });
 		console.log("result", result);
 
 		!result
@@ -25,12 +25,18 @@ const handleSignIn = async (req, res) => {
 					status: 404,
 					data: req.body,
 					message:
-						"Username or password incorrect.  Please sign up or register for an account.",
+						"Username or password incorrect.  Please try again or click the link below to register.",
 			  })
-			: res.status(200).json({ status: 200, message: "User Logged In" });
+			: res.status(200).json({
+					status: 200,
+					data: { id: result._id, name: result.name },
+					message: "User Logged In",
+			  });
 	} catch (err) {
-		console.log("Error: ", err.message);
-		res.status(500).json({ status: 500, message: "Internal Server Error" });
+		res.status(500).json({
+			status: 500,
+			message: "Internal Server Error. Please try again.",
+		});
 	}
 	client.close();
 };

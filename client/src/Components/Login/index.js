@@ -2,16 +2,45 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import Header from "../Header";
 import { Main } from "../LandingPage";
-import LoginButton from "./LoginButton";
+import { CurrentUserContext } from "./CurrentUserContext";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
-	const [userInput, setUserInput] = useState({ username: "", password: "" });
+	const [userInput, setUserInput] = useState({ userName: "", password: "" });
+	const { setCurrentUser } = useContext(CurrentUserContext);
+	const [subState, setSubState] = useState("Idle");
+	const [errorMsg, setErrorMsg] = useState("");
+	let history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setSubState("loading");
+		fetch("/signin", {
+			method: "POST",
+			body: JSON.stringify(userInput),
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				console.log("response: ", json);
+				if (json.status === 200) {
+					setSubState("Success");
+					setCurrentUser({ id: json.data.id, name: json.data.name });
+					history.push("/home");
+				}
+				{
+					setSubState("Error");
+					setErrorMsg(json.message);
+				}
+			})
+			.catch((err) => {
+				console.log("Error:", err);
+			});
 	};
 
-	console.log("userInput: ", userInput);
 	return (
 		<>
 			<Header />
@@ -25,7 +54,7 @@ const Login = () => {
 								onChange={(e) => {
 									setUserInput({
 										...userInput,
-										username: e.target.value,
+										userName: e.target.value,
 									});
 								}}
 							/>
@@ -39,6 +68,7 @@ const Login = () => {
 									});
 								}}
 							/>
+							<ErrorDiv subState={subState}>{errorMsg}</ErrorDiv>
 							<button type="submit">Log In</button>
 						</SignInForm>
 					</FormDiv>
@@ -94,9 +124,26 @@ const SignInForm = styled.form`
 		font-size: 20px;
 		font-weight: bold;
 		color: var(--color-element-headline);
+		cursor: pointer;
 	}
 `;
 
+const ErrorDiv = styled.div`
+	display: ${(props) =>
+		props.subState === "Error"
+			? "flex"
+			: props.subState === "Success" || props.subState === "Idle"
+			? "none"
+			: "none"};
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: red;
+	width: 300px;
+	background: var(--color-element-headline);
+	padding: 10px;
+	border-radius: 5px;
+`;
 const TitleDiv = styled.div`
 	display: flex;
 	justify-content: center;

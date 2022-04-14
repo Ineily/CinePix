@@ -84,7 +84,7 @@ export const PreviewProfPic = styled.img`
 	width: 100px;
 `;
 
-const SocialsNums = styled.div`
+export const SocialsNums = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -163,7 +163,7 @@ const StatDiv = styled.div`
 		padding: 15px 0;
 	}
 `;
-const FollowDiv = styled.div`
+export const FollowDiv = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 175px;

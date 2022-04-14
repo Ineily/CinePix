@@ -11,6 +11,22 @@ const SearchBar = () => {
 		searchField.value = "";
 	};
 
+	const handleKeyPress = (ev) => {
+		let searchField = document.querySelector(".search-field");
+		let userSearch = searchField.value;
+		let urlQuery = userSearch.replaceAll(" ", "+");
+		console.log("urlQuery: ", urlQuery);
+
+		if (ev.keyCode === 13) {
+			fetch(`/search/${urlQuery}`)
+				.then((res) => res.json())
+				.then((data) => {
+					console.log("Data", data);
+				})
+				.catch((err) => console.log("Error: ", err));
+		}
+	};
+
 	return (
 		<Search className="search">
 			<div onClick={handleClick} className="search-icon"></div>
@@ -18,6 +34,7 @@ const SearchBar = () => {
 				<input
 					className="search-field"
 					placeholder="Search Here"
+					onKeyUp={handleKeyPress}
 				></input>
 				<span onClick={handleClear}></span>
 			</div>
