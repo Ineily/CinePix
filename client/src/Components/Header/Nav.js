@@ -1,48 +1,59 @@
 import styled from "styled-components";
 import { BsBellFill, BsChevronDown } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../Login/CurrentUserContext";
 const Nav = () => {
+	const { currentUser } = useContext(CurrentUserContext);
 	return (
 		<BrowseNotSetNav>
-			<BrowseWrap>
-				<Browse>Browse</Browse>
-			</BrowseWrap>
-			<DropdownNotiWrap>
-				<NotiWrap>
-					<StyledFiBell />
-					<StyledBsCD />
-				</NotiWrap>
-				<DropdownNotiDiv className="hover">
-					<Dropdownul>
-						<li>No new notifications</li>
-					</Dropdownul>
-				</DropdownNotiDiv>
-			</DropdownNotiWrap>
-			<DropdownProfWrap>
-				<ProfWrap>
-					<ProfilePic
-						src="../../public/assets/Richard-Storey.jpg"
-						alt="Profile Picture"
-					/>
-					<StyledBsCD />
-				</ProfWrap>
-				<DropdownProfDiv className="hover">
-					<Dropdownul>
-						<li>
-							<StyledLink to="#">My Profile</StyledLink>
-						</li>
-						<li>
-							<StyledLink to="#">Find Friends</StyledLink>
-						</li>
-						<li>
-							<StyledLink to="#">Settings</StyledLink>
-						</li>
-						<li>
-							<StyledLink to="#">Log Out</StyledLink>
-						</li>
-					</Dropdownul>
-				</DropdownProfDiv>
-			</DropdownProfWrap>
+			{currentUser.id === null ? (
+				<Browse to="/login" children={"Log In"} />
+			) : (
+				<>
+					<BrowseWrap>
+						<Browse to="/browse" children={"Browse"} />
+					</BrowseWrap>
+					<DropdownNotiWrap>
+						<NotiWrap>
+							<StyledFiBell />
+							<StyledBsCD />
+						</NotiWrap>
+						<DropdownNotiDiv className="hover">
+							<Dropdownul>
+								<li>No new notifications</li>
+							</Dropdownul>
+						</DropdownNotiDiv>
+					</DropdownNotiWrap>
+					<DropdownProfWrap>
+						<ProfWrap>
+							<ProfilePic
+								src="/assets/Richard-Storey.jpg"
+								alt="Profile Picture"
+							/>
+							<StyledBsCD />
+						</ProfWrap>
+						<DropdownProfDiv className="hover">
+							<Dropdownul>
+								<li>
+									<StyledLink to={`/users/${currentUser.id}`}>
+										My Profile
+									</StyledLink>
+								</li>
+								<li>
+									<StyledLink to="#">Find Friends</StyledLink>
+								</li>
+								<li>
+									<StyledLink to="#">Settings</StyledLink>
+								</li>
+								<li>
+									<StyledLink to="#">Log Out</StyledLink>
+								</li>
+							</Dropdownul>
+						</DropdownProfDiv>
+					</DropdownProfWrap>
+				</>
+			)}
 		</BrowseNotSetNav>
 	);
 };
@@ -67,9 +78,10 @@ const BrowseNotSetNav = styled.nav`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 350px;
+	width: max-content;
 	margin-top: -20px;
 	z-index: 1000;
+	padding: 0 30px;
 `;
 
 const ProfilePic = styled.img`
@@ -126,7 +138,7 @@ const DropdownNotiWrap = styled.div`
 		}
 	}
 `;
-const Browse = styled.button`
+const Browse = styled(Link)`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;

@@ -2,8 +2,11 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { testThroughInsomnia } = require("./handlers/testThroughInsomnia");
+const { getUserById } = require("./handlers/getUserById");
+const { handleSearch } = require("./handlers/handleSearch");
 const { handleSignIn } = require("./handlers/handleSignIn");
+const { testThroughInsomnia } = require("./handlers/testThroughInsomnia");
+
 const PORT = 4000;
 
 express()
@@ -26,5 +29,7 @@ express()
 
 	// REST endpoints ------------------------------------------
 	.get("/get-genre", testThroughInsomnia)
+	.get("/users/:id", getUserById)
+	.get("/search/", handleSearch)
 	.post("/signin", handleSignIn)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));
