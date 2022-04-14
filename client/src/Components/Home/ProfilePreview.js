@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import profpic from "../../assets/Richard-Storey.jpg";
 import { FaBaby } from "react-icons/fa";
 
 const ProfilePreview = () => {
 	return (
 		<PreviewDiv>
 			<PicDiv>
-				<PreviewProfPic alt="Profile Photo" src={profpic} />
+				<PreviewProfPic
+					alt="Profile Photo"
+					src="../../assets/Richard-Storey.jpg"
+				/>
 			</PicDiv>
 			<FollowDiv>
 				<p>Followers</p>

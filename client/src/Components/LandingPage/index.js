@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
-import Header from "./Components/Header";
+import Header from "../Header";
 const LandingPage = () => {
 	return (
 		<>
