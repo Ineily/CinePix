@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "../Header";
-import { Main } from "../../LandingPage";
+import { Main } from "../LandingPage";
 import ProfilePreview from "./ProfilePreview";
 import ReviewFeed from "./ReviewFeed";
 import SuggestedFriendGrid from "./SuggestedFriendGrid";

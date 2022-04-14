@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import Header from "../Header";
-import { Main } from "../../LandingPage";
+import { Main } from "../LandingPage";
+import LoginButton from "./LoginButton";
+
 const Login = () => {
 	const [userInput, setUserInput] = useState({ username: "", password: "" });
 

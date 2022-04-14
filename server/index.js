@@ -3,6 +3,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const { testThroughInsomnia } = require("./handlers/testThroughInsomnia");
+const { handleSignIn } = require("./handlers/handleSignIn");
 const PORT = 4000;
 
 express()
@@ -24,5 +25,6 @@ express()
 	.use("/", express.static(__dirname + "/"))
 
 	// REST endpoints ------------------------------------------
-	.get("/get-genre/", testThroughInsomnia)
+	.get("/get-genre", testThroughInsomnia)
+	.post("/signin", handleSignIn)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));

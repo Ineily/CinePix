@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
-import LandingPage from "./LandingPage";
+import LandingPage from "./Components/LandingPage";
 import Home from "./Components/Home";
 import Signup from "./Components/Signup";
 import Login from "./Components/Login";

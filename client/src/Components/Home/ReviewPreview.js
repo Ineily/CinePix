@@ -1,11 +1,13 @@
 import { PicDiv, PreviewProfPic } from "./ProfilePreview";
 import styled from "styled-components";
-import friendprofpic from "../../assets/Kay-Bridges.jpg";
 const ReviewPreview = () => {
 	return (
 		<PreviewWrap>
 			<PicDiv className="profile">
-				<PreviewProfPic alt="Profile Picture" src={friendprofpic} />
+				<PreviewProfPic
+					alt="Profile Picture"
+					src="../../public/assets/Kay-Bridges.jpg"
+				/>
 			</PicDiv>
 			<PreviewReviewWrap>
 				<PosterPicWrap>

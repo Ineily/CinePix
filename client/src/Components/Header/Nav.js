@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { BsBellFill, BsChevronDown } from "react-icons/bs";
-import imgsrc from "../../assets/Richard-Storey.jpg";
 import { Link } from "react-router-dom";
 const Nav = () => {
 	return (
@@ -21,7 +20,10 @@ const Nav = () => {
 			</DropdownNotiWrap>
 			<DropdownProfWrap>
 				<ProfWrap>
-					<ProfilePic src={imgsrc} alt="Profile Picture" />
+					<ProfilePic
+						src="../../public/assets/Richard-Storey.jpg"
+						alt="Profile Picture"
+					/>
 					<StyledBsCD />
 				</ProfWrap>
 				<DropdownProfDiv className="hover">
@@ -67,6 +69,7 @@ const BrowseNotSetNav = styled.nav`
 	align-items: center;
 	width: 350px;
 	margin-top: -20px;
+	z-index: 1000;
 `;
 
 const ProfilePic = styled.img`

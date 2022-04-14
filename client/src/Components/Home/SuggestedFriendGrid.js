@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Title } from "./ReviewFeed";
-import friend1 from "../../assets/Cheryl-Payne.jpg";
-import friend2 from "../../assets/Jackie-McIlwaine.jpg";
-import friend3 from "../../assets/Joseph-Gonzalez.jpg";
-import friend4 from "../../assets/Max-Mutinda.jpg";
-import friend5 from "../../assets/Rebecca-Shephard.jpg";
-import friend6 from "../../assets/Trent-Alexander.jpg";
+// import friend1 from "../../assets/Cheryl-Payne.jpg";
+// import friend2 from "../../assets/Jackie-McIlwaine.jpg";
+// import friend3 from "../../assets/Joseph-Gonzalez.jpg";
+// import friend4 from "../../assets/Max-Mutinda.jpg";
+// import friend5 from "../../assets/Rebecca-Shephard.jpg";
+// import friend6 from "../../assets/Trent-Alexander.jpg";
 
 const SuggestedFriendGrid = () => {
 	return (
@@ -13,27 +13,45 @@ const SuggestedFriendGrid = () => {
 			<Title>Suggested Friends</Title>
 			<FriendGridWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend1} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Cheryl-Payne.jpg"
+					/>
 					<p>Cheryl Payne</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend2} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Jackie-McIlwaine.jpg"
+					/>
 					<p>Jackie McIlwaine</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend3} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Joseph-Gonzalez.jpg"
+					/>
 					<p>Joseph Gonzalez</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend4} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Max-Mutinda.jpg"
+					/>
 					<p>Max Mutinda</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend5} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Rebecca-Shephard.jpg"
+					/>
 					<p>Rebecca Shephard</p>
 				</SugFriendWrap>
 				<SugFriendWrap>
-					<img alt="Suggested Friend" src={friend6} />
+					<img
+						alt="Suggested Friend"
+						src="../../public/assets/Trent-Alexander.jpg"
+					/>
 					<p>Trent Alexander</p>
 				</SugFriendWrap>
 			</FriendGridWrap>
