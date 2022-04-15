@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { SearchContext } from "../SearchResults/SearchContext";
+import { useHistory } from "react-router-dom";
 
 const SearchBar = () => {
+	const { setSearchResults } = useContext(SearchContext);
+	const history = useHistory();
+
+	//Handlers to expand search bar, clear search bar, fetch data on search
 	const handleClick = () => {
 		const search = document.querySelector(".search");
 		search.classList.toggle("active");
@@ -15,13 +22,13 @@ const SearchBar = () => {
 		let searchField = document.querySelector(".search-field");
 		let userSearch = searchField.value;
 		let urlQuery = userSearch.replaceAll(" ", "+");
-		console.log("urlQuery: ", urlQuery);
 
 		if (ev.keyCode === 13) {
 			fetch(`/search/${urlQuery}`)
 				.then((res) => res.json())
 				.then((data) => {
-					console.log("Data", data);
+					setSearchResults(data.data.results);
+					history.push("/searchresults");
 				})
 				.catch((err) => console.log("Error: ", err));
 		}

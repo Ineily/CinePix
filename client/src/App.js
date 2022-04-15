@@ -6,6 +6,7 @@ import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import Browse from "./Components/Browse";
 import UserProfile from "./Components/User Profile";
+import SearchResults from "./Components/SearchResults";
 
 function App() {
 	return (
@@ -29,6 +30,9 @@ function App() {
 				</Route>
 				<Route exact path="/browse">
 					<Browse />
+				</Route>
+				<Route exact path="/searchresults">
+					<SearchResults />
 				</Route>
 				<Route path="">
 					<div>404 - This is not what you're looking for</div>

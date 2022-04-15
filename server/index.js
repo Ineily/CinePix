@@ -30,6 +30,6 @@ express()
 	// REST endpoints ------------------------------------------
 	.get("/get-genre", testThroughInsomnia)
 	.get("/users/:id", getUserById)
-	.get("/search/", handleSearch)
+	.get("/search/:search", handleSearch)
 	.post("/signin", handleSignIn)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));
