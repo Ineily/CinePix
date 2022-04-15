@@ -3,10 +3,10 @@ require("dotenv").config();
 const { REACT_APP_TMDB_KEY } = process.env;
 
 const handleSearch = async (req, res) => {
-	let searchQuery = req.params.search;
+	let { search } = req.params;
 	try {
 		const response = await request(
-			`https://api.themoviedb.org/3/search/movie?api_key=${REACT_APP_TMDB_KEY}&query=${searchQuery}`
+			`https://api.themoviedb.org/3/search/movie?api_key=${REACT_APP_TMDB_KEY}&query=${search}`
 		);
 		const result = await JSON.parse(response);
 		console.log("result: ", result);
