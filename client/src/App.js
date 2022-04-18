@@ -19,7 +19,7 @@ function App() {
 				<Route exact path="/users/:id">
 					<UserProfile />
 				</Route>
-				<Route exact path="/signup">
+				<Route exact path="/register">
 					<Signup />
 				</Route>
 				<Route exact path="/login">

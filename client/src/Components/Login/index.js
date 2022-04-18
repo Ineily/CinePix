@@ -4,6 +4,7 @@ import Header from "../Header";
 import { Main } from "../LandingPage";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 	const [userInput, setUserInput] = useState({ userName: "", password: "" });
@@ -69,6 +70,10 @@ const Login = () => {
 								}}
 							/>
 							<ErrorDiv subState={subState}>{errorMsg}</ErrorDiv>
+							<SignupDiv>
+								Not yet a member?{" "}
+								<Link to="/register">Register here!</Link>
+							</SignupDiv>
 							<button type="submit">Log In</button>
 						</SignInForm>
 					</FormDiv>
@@ -78,6 +83,22 @@ const Login = () => {
 	);
 };
 
+const SignupDiv = styled.div`
+	width: 300px;
+	height: 30px;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: pre;
+	margin: 10px;
+	border-radius: 5px;
+	background: var(--color-illustration-secondary);
+	color: var(--color-element-background);
+	Link {
+	}
+`;
+
 const SignInWrap = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -86,9 +107,10 @@ const SignInWrap = styled.div`
 	width: max-content;
 	margin: 20vh auto;
 	border-radius: 10px;
+	box-shadow: 2px 5px 16px 0px var(--color-element-background);
 `;
 
-const FormDiv = styled.div`
+export const FormDiv = styled.div`
 	background: hsla(177, 100%, 14%, 0.7);
 	border-radius: 0 0 10px 10px;
 	padding: 20px;
@@ -143,8 +165,9 @@ const ErrorDiv = styled.div`
 	background: var(--color-element-headline);
 	padding: 10px;
 	border-radius: 5px;
+	margin: 10px;
 `;
-const TitleDiv = styled.div`
+export const TitleDiv = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 20px 0;
