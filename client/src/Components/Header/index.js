@@ -42,7 +42,7 @@ const GradientDiv = styled.div`
 	);
 	background-size: 300%;
 	background-position: left;
-	animation: ${gradientAnimation} 14s infinite alternate;
+	animation: ${gradientAnimation} 6s infinite alternate;
 
 	h1 {
 		color: var(--color-element-headline);
