@@ -6,6 +6,9 @@ const CurrentUserProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = usePersistedState("Current User", {
 		id: null,
 		name: null,
+		avatarSrc: "",
+		followers: [],
+		following: []
 	});
 	return (
 		<CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>

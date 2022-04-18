@@ -29,7 +29,7 @@ const Login = () => {
 				console.log("response: ", json);
 				if (json.status === 200) {
 					setSubState("Success");
-					setCurrentUser({ id: json.data.id, name: json.data.name });
+					setCurrentUser({ id: json.data.id, firstName: json.data.firstName, lastName: json.data.lastName, avatarSrc: json.data.avatarSrc, followers: json.data.followers, following: json.data.following});
 					history.push("/home");
 				}
 				{
@@ -150,7 +150,7 @@ const SignInForm = styled.form`
 	}
 `;
 
-const ErrorDiv = styled.div`
+export const ErrorDiv = styled.div`
 	display: ${(props) =>
 		props.subState === "Error"
 			? "flex"

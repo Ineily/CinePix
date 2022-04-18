@@ -7,8 +7,11 @@ import Login from "./Components/Login";
 import Browse from "./Components/Browse";
 import UserProfile from "./Components/User Profile";
 import SearchResults from "./Components/SearchResults";
+import { useContext } from "react";
+import { CurrentUserContext } from "./Components/Login/CurrentUserContext";
 
 function App() {
+	const {currentUser} = useContext(CurrentUserContext)
 	return (
 		<BrowserRouter>
 			<GlobalStyles />
@@ -26,13 +29,13 @@ function App() {
 					<Login />
 				</Route>
 				<Route exact path="/home">
-					<Home />
+				{currentUser.id ? <Home /> : <Login />}
 				</Route>
 				<Route exact path="/browse">
-					<Browse />
+				{currentUser.id ? <Browse /> : <Login />}
 				</Route>
 				<Route exact path="/searchresults">
-					<SearchResults />
+				{currentUser.id ? <SearchResults /> : <Login />}
 				</Route>
 				<Route path="">
 					<div>404 - This is not what you're looking for</div>

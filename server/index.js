@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { getUserById } = require("./handlers/getUserById");
 const { handleSearch } = require("./handlers/handleSearch");
 const { handleSignIn } = require("./handlers/handleSignIn");
+const {handleRegistration} = require("./handlers/handleRegistration")
 const { testThroughInsomnia } = require("./handlers/testThroughInsomnia");
 
 const PORT = 4000;
@@ -32,4 +33,5 @@ express()
 	.get("/users/:id", getUserById)
 	.get("/search/:search", handleSearch)
 	.post("/signin", handleSignIn)
+	.post("/register", handleRegistration)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));
