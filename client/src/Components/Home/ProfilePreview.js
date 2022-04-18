@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import { FaBaby } from "react-icons/fa";
+import { useContext } from "react";
+import { CurrentUserContext } from "../Login/CurrentUserContext";
 
 const ProfilePreview = () => {
+	const {currentUser} = useContext(CurrentUserContext)
 	return (
 		<PreviewDiv>
 			<PicDiv>
 				<PreviewProfPic
 					alt="Profile Photo"
-					src="../../assets/Richard-Storey.jpg"
+					src={currentUser.avatarSrc}
 				/>
 			</PicDiv>
 			<FollowDiv>
@@ -15,9 +18,9 @@ const ProfilePreview = () => {
 				<p>Following</p>
 			</FollowDiv>
 			<SocialsNums>
-				<p>5</p>
+				<p>{currentUser.followers.length}</p>
 				<p>|</p>
-				<p>3</p>
+				<p>{currentUser.following.length}</p>
 			</SocialsNums>
 			<ReviewStatsDiv>
 				<TopWrap>

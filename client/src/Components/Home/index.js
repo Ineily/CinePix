@@ -6,7 +6,7 @@ import ReviewFeed from "./ReviewFeed";
 import SuggestedFriendGrid from "./SuggestedFriendGrid";
 
 const Home = () => {
-	return (
+		return (
 		<>
 			<Header />
 			<Main>

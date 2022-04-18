@@ -28,7 +28,7 @@ const Nav = () => {
 					<DropdownProfWrap>
 						<ProfWrap>
 							<ProfilePic
-								src="/assets/Richard-Storey.jpg"
+								src={currentUser.avatarSrc}
 								alt="Profile Picture"
 							/>
 							<StyledBsCD />
