@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { getUserById } = require("./handlers/getUserById");
 const { handleSearch } = require("./handlers/handleSearch");
 const { handleSignIn } = require("./handlers/handleSignIn");
+const {getMovieById} = require("./handlers/getMovieById")
 const {handleRegistration} = require("./handlers/handleRegistration")
 const { testThroughInsomnia } = require("./handlers/testThroughInsomnia");
 
@@ -32,6 +33,7 @@ express()
 	.get("/get-genre", testThroughInsomnia)
 	.get("/users/:id", getUserById)
 	.get("/search/:search", handleSearch)
+	.get("/movies/:id", getMovieById)
 	.post("/signin", handleSignIn)
 	.post("/register", handleRegistration)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));
