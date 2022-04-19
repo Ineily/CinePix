@@ -5,20 +5,21 @@ import styled from "styled-components";
 
 const SearchGrid = () => {
 	const { searchResults } = useContext(SearchContext);
-
+	console.log(searchResults)
 	return (
 		<ResultsWrapper>
 			{searchResults.map((result) => {
 				return (
 					<ResultPreview
+						id={result.id}
 						searchResults={searchResults}
 						posterPath={result.poster_path}
 						title={result.original_title}
 						releaseDate={result.release_date}
 					/>
-				);
+				)
 			})}
-			;
+			
 		</ResultsWrapper>
 	);
 };

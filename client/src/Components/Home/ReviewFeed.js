@@ -11,7 +11,7 @@ const ReviewFeed = () => {
 	);
 };
 
-const FeedWrap = styled.div`
+export const FeedWrap = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;

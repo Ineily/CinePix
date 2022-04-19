@@ -1,25 +1,21 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const ResultPreview = ({ searchResults, posterPath, title, releaseDate }) => {
+const ResultPreview = ({ searchResults, posterPath, title, releaseDate, id }) => {
 	//Assign a variable for baseURL and image size for the poster image path, as required by TMDB API
 	const baseUrl = "http://image.tmdb.org/t/p/w185/";
 
 	const year = releaseDate.slice(0, 4);
-	// console.log(
-	// 	"searchResults: ",
-	// 	searchResults,
-	// 	"posterPath: ",
-	// 	baseUrl + posterPath
-	// );
+
 	return !posterPath ? (
-		<ImgWrap posterPath={posterPath}>
+		<ImgWrap to={`/movies/${id}`} posterPath={posterPath}>
 			<MovieTitle className={"title"}>
 				{title} ({year})
 			</MovieTitle>
 			No Image Available
 		</ImgWrap>
 	) : (
-		<ImgWrap posterPath={posterPath}>
+		<ImgWrap to={`/movies/${id}`} posterPath={posterPath}>
 			<MovieTitle className={"title"}>
 				{title} {releaseDate && `(${year})`}
 			</MovieTitle>
@@ -27,7 +23,7 @@ const ResultPreview = ({ searchResults, posterPath, title, releaseDate }) => {
 		</ImgWrap>
 	);
 };
-const ImgWrap = styled.div`
+const ImgWrap = styled(Link)`
 	border-radius: 15px;
 	margin: 15px;
 	overflow: hidden;

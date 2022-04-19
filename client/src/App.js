@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Browse from "./Components/Browse";
 import UserProfile from "./Components/User Profile";
 import SearchResults from "./Components/SearchResults";
+import MovieDetails from "./Components/MovieDetails";
 import { useContext } from "react";
 import { CurrentUserContext } from "./Components/Login/CurrentUserContext";
 
@@ -19,7 +20,7 @@ function App() {
 				<Route exact path="/">
 					<LandingPage />
 				</Route>
-				<Route exact path="/users/:id">
+				<Route path="/users/:id">
 					<UserProfile />
 				</Route>
 				<Route exact path="/register">
@@ -36,6 +37,9 @@ function App() {
 				</Route>
 				<Route exact path="/searchresults">
 				{currentUser.id ? <SearchResults /> : <Login />}
+				</Route>
+				<Route path="/movies/:id">
+				{currentUser.id ? <MovieDetails /> : <Login />}
 				</Route>
 				<Route path="">
 					<div>404 - This is not what you're looking for</div>

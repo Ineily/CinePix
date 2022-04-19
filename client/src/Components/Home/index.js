@@ -24,7 +24,7 @@ const Home = () => {
 	);
 };
 
-const PageDivision = styled.div`
+export const PageDivision = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 30vw;
