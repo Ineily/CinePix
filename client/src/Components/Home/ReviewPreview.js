@@ -1,6 +1,6 @@
 import { PicDiv, PreviewProfPic } from "./ProfilePreview";
 import styled from "styled-components";
-const ReviewPreview = () => {
+const ReviewPreview = (movieReviews) => {
 	return (
 		<PreviewWrap>
 			<PicDiv className="profile">

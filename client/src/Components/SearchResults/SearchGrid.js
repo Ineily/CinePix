@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const SearchGrid = () => {
 	const { searchResults } = useContext(SearchContext);
-	console.log(searchResults)
+	console.log(searchResults);
 	return (
 		<ResultsWrapper>
 			{searchResults.map((result) => {
@@ -17,14 +17,13 @@ const SearchGrid = () => {
 						title={result.original_title}
 						releaseDate={result.release_date}
 					/>
-				)
+				);
 			})}
-			
 		</ResultsWrapper>
 	);
 };
 
-const ResultsWrapper = styled.div`
+export const ResultsWrapper = styled.div`
 	display: flex;
 	width: 100vw;
 	flex-wrap: wrap;

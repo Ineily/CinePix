@@ -1,12 +1,23 @@
 import styled from "styled-components";
 import ReviewPreview from "./ReviewPreview";
-const ReviewFeed = () => {
+import { useContext } from "react";
+import { CurrentUserContext } from "../Login/CurrentUserContext";
+
+const ReviewFeed = (users) => {
+	const { currentUser } = useContext(CurrentUserContext);
+	console.log("users: ", users.users, "currentUser: ", currentUser);
+	let filteredUsers = users.users.filter((user) => {
+		return currentUser.following.includes(user._id);
+	});
+	let movieReviewArray = filteredUsers.map((user) => {
+		return Array.from(user.movieReviews);
+	});
+	console.log("movieReviewArray: ", movieReviewArray);
 	return (
 		<FeedWrap>
-			<Title>Friends' Picks</Title>
-			<ReviewPreview />
-			<ReviewPreview />
-			<ReviewPreview />
+			{movieReviewArray.map((movieReview) => {
+				return <ReviewPreview />;
+			})}
 		</FeedWrap>
 	);
 };
