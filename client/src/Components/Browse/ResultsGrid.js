@@ -6,12 +6,12 @@ import { SearchContext } from "../SearchResults/SearchContext";
 
 const ResultsGrid = (movies, displayFlag) => {
 	const { searchResults } = useContext(SearchContext);
-	console.log(searchResults);
 	return (
 		<ResultsWrapper>
 			{searchResults.map((movie) => {
 				return (
 					<ResultPreview
+						key={movie.id}
 						id={movie.id}
 						movies={movies}
 						posterPath={movie.poster_path}

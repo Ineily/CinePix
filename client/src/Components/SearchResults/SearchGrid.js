@@ -5,12 +5,12 @@ import styled from "styled-components";
 
 const SearchGrid = () => {
 	const { searchResults } = useContext(SearchContext);
-	console.log(searchResults);
 	return (
 		<ResultsWrapper>
 			{searchResults.map((result) => {
 				return (
 					<ResultPreview
+						key={result.id}
 						id={result.id}
 						searchResults={searchResults}
 						posterPath={result.poster_path}

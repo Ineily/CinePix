@@ -6,6 +6,9 @@ import { FollowDiv, SocialsNums } from "../Home/ProfilePreview";
 import { PageDivision } from "../Home";
 import FullReviewFeed from "./FullReviewFeed";
 import LoadAnimation from "../LoadAnimation";
+import Footer from "../Footer";
+import { useContext } from "react";
+import { CurrentUserContext } from "../Login/CurrentUserContext";
 
 const UserProfile = () => {
 	const { id } = useParams();
@@ -13,7 +16,9 @@ const UserProfile = () => {
 	const [status, setStatus] = useState("idle");
 	const [followersNum, setFollowersNum] = useState(0);
 	const [followingNum, setFollowingNum] = useState(0);
-
+	let { currentUser } = useContext(CurrentUserContext);
+	let doesCurrentUserFollow = currentUser.following.includes(id);
+	console.log("doesCurrentUserFollow: ", doesCurrentUserFollow);
 	useEffect(() => {
 		setStatus("loading");
 		fetch(`/users/${id}`)
@@ -27,7 +32,6 @@ const UserProfile = () => {
 			.catch((err) => console.log("Error: ", err));
 	}, [id]);
 
-	console.log("userDetails: ", userDetails);
 	return (
 		<>
 			<Header />
@@ -58,6 +62,9 @@ const UserProfile = () => {
 									<p>{followingNum}</p>
 								</SocialsNums>
 								<BioDiv>{userDetails.bio}</BioDiv>
+								{!doesCurrentUserFollow && (
+									<button>Add Friend</button>
+								)}
 							</DetailsDiv>
 						</PageDivision>
 						<StyledPageDiv>
@@ -69,6 +76,7 @@ const UserProfile = () => {
 							/>
 						</StyledPageDiv>
 					</ProfileWrap>
+					<Footer />
 				</>
 			)}
 		</>
@@ -100,6 +108,24 @@ const DetailsDiv = styled.div`
 	z-index: 50;
 	height: max-content;
 	position: fixed;
+
+	a {
+		cursor: pointer;
+	}
+
+	button {
+		width: 150px;
+		height: 60px;
+		margin: 10px;
+		outline: none;
+		border: none;
+		border-radius: 20px;
+		background: var(--color-illustration-secondary);
+		font-size: 20px;
+		font-weight: bold;
+		color: var(--color-element-background);
+		cursor: pointer;
+	}
 `;
 const StyledFollowDiv = styled(FollowDiv)`
 	display: flex;

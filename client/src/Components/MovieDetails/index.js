@@ -4,6 +4,9 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import { CurrentFilmContext } from "./CurrentFilmContext";
+import LoadAnimation from "../LoadAnimation";
+import { ImgWrap, MovieTitle } from "../SearchResults/ResultPreview";
+import Footer from "../Footer";
 
 const MovieDetails = () => {
 	const { id } = useParams();
@@ -14,13 +17,16 @@ const MovieDetails = () => {
 		release_date: "",
 		genres: [],
 	});
+	const [state, setState] = useState("idle");
 
 	const year = filmDetails.release_date.slice(0, 4);
 	useEffect(() => {
+		setState("loading");
 		fetch(`/movies/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setFilmDetails(data.data);
+				setState("idle");
 			})
 			.catch((err) => console.log("Error: ", err));
 	}, [id]);
@@ -44,40 +50,77 @@ const MovieDetails = () => {
 	return (
 		<>
 			<Header />
-			<Wrapper>
-				<div>
-					<img
-						alt="Poster"
-						src={`${baseUrl}` + `${filmDetails.poster_path}`}
-					/>
-					<FilmInfoWrap>
-						<h2>
-							{filmDetails.title}{" "}
-							{filmDetails.release_date && `(${year})`}
-						</h2>
-						<Genrediv>
-							{filmDetails.genres.map((genre) => {
-								return <Link to="#">{genre.name}</Link>;
-							})}
-						</Genrediv>
-						<p>{filmDetails.overview}</p>
-						{filmDetails.homepage && (
-							<Link
-								to={{ pathname: `${filmDetails.homepage}` }}
-								target="_blank"
-							>
-								Movie Homepage
-							</Link>
-						)}
-					</FilmInfoWrap>
-				</div>
-				<ButtonLinkWrap>
-					<button onClick={startReview}>Review This Movie!</button>
-					<button onClick={() => history.goBack()}>
-						Back to Search Results
-					</button>
-				</ButtonLinkWrap>
-			</Wrapper>
+			<Pagewrap>
+				{state === "loading" ? (
+					<LoadAnimation />
+				) : (
+					<Wrapper>
+						<div>
+							{!filmDetails.poster_path ? (
+								<StyledImgWrap to={`#`}>
+									<MovieTitle className={"title"}>
+										{filmDetails.title}{" "}
+										{filmDetails.release_date &&
+											`(${filmDetails.release_date.slice(
+												0,
+												4
+											)})`}
+									</MovieTitle>
+									No Image Available
+								</StyledImgWrap>
+							) : (
+								<img
+									alt="Poster"
+									src={
+										`${baseUrl}` +
+										`${filmDetails.poster_path}`
+									}
+								/>
+							)}
+							<FilmInfoWrap>
+								<h2>
+									{filmDetails.title}{" "}
+									{filmDetails.release_date && `(${year})`}
+								</h2>
+								<Genrediv>
+									{filmDetails.genres.map((genre) => {
+										return (
+											<Link
+												key={Math.floor(
+													Math.random() * 100000000
+												)}
+												to="#"
+											>
+												{genre.name}
+											</Link>
+										);
+									})}
+								</Genrediv>
+								<p>{filmDetails.overview}</p>
+								{filmDetails.homepage && (
+									<Link
+										to={{
+											pathname: `${filmDetails.homepage}`,
+										}}
+										target="_blank"
+									>
+										Movie Homepage
+									</Link>
+								)}
+							</FilmInfoWrap>
+						</div>
+						<ButtonLinkWrap>
+							<button onClick={startReview}>
+								Review This Movie!
+							</button>
+							<button onClick={() => history.goBack()}>
+								Back to Search Results
+							</button>
+						</ButtonLinkWrap>
+					</Wrapper>
+				)}
+			</Pagewrap>
+			<Footer />
 		</>
 	);
 };
@@ -194,5 +237,14 @@ const ButtonLinkWrap = styled.div`
 		}
 	}
 `;
+const StyledImgWrap = styled(ImgWrap)`
+	background: var(--color-illustration-secondary);
+	color: var(--color-element-background);
+	width: 50%;
+	margin-top: 0;
+`;
 
+const Pagewrap = styled.div`
+	height: 75vh;
+`;
 export default MovieDetails;

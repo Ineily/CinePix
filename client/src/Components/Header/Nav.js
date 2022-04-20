@@ -3,8 +3,20 @@ import { BsBellFill, BsChevronDown } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
+import { useHistory } from "react-router-dom";
 const Nav = () => {
-	const { currentUser } = useContext(CurrentUserContext);
+	const history = useHistory();
+	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+
+	const handleLogout = () => {
+		setCurrentUser({
+			id: null,
+			avatarSrc: "",
+			followers: [],
+			following: [],
+		});
+		history.push("/login");
+	};
 	return (
 		<BrowseNotSetNav>
 			{currentUser.id === null ? (
@@ -47,7 +59,9 @@ const Nav = () => {
 									<StyledLink to="#">Settings</StyledLink>
 								</li>
 								<li>
-									<StyledLink to="#">Log Out</StyledLink>
+									<StyledDiv onClick={handleLogout}>
+										Log Out
+									</StyledDiv>
 								</li>
 							</Dropdownul>
 						</DropdownProfDiv>
@@ -192,6 +206,13 @@ const Dropdownul = styled.ul`
 `;
 
 const StyledLink = styled(Link)`
+	color: var(--color-element-headline);
+	text-decoration: none;
+	&:hover {
+		color: var(--color-illustration-highlight);
+	}
+`;
+const StyledDiv = styled.div`
 	color: var(--color-element-headline);
 	text-decoration: none;
 	&:hover {

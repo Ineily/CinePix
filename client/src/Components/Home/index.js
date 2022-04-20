@@ -6,49 +6,49 @@ import ProfilePreview from "./ProfilePreview";
 import ReviewFeed from "./ReviewFeed";
 import SuggestedFriendGrid from "./SuggestedFriendGrid";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
+import { UsersContext } from "./UsersContext";
+import NoFollowing from "./NoFollowing";
+import Footer from "../Footer";
 
 const Home = () => {
 	const { currentUser } = useContext(CurrentUserContext);
-	const [users, setUsers] = useState([]);
+	const { users, setUsers } = useContext(UsersContext);
+	const [suggested, setSuggested] = useState([]);
 
 	useEffect(() => {
 		fetch(`/get-users`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data: ", data);
+				console.log(data);
 				setUsers(data.data);
-				const sugFriendsArray = users.filter(
-					(user) => !currentUser.following.includes(user._id)
-				);
-
-				console.log(
-					"users: ",
-					users,
-					"following: ",
-					currentUser.following,
-					"suggestedFriends: ",
-					sugFriendsArray
-				);
 			})
 			.catch((err) => console.log("Error: ", err));
 	}, []);
+
 	return (
 		<>
-			<Header />
-			<Main>
-				<PageDivision>
-					<ProfilePreview />
-				</PageDivision>
-				<PageDivision2>
-					<ReviewFeed users={users} />
-				</PageDivision2>
-				<PageDivision>
-					<SuggestedFriendGrid />
-				</PageDivision>
-			</Main>
+			<Wrap>
+				<Header />
+				<StyledMain>
+					<PageDivision>
+						<ProfilePreview />
+					</PageDivision>
+					<PageDivision2>
+						{currentUser.following.length === 0 && <NoFollowing />}
+						<ReviewFeed />
+					</PageDivision2>
+					<PageDivision>
+						<SuggestedFriendGrid />
+					</PageDivision>
+				</StyledMain>
+			</Wrap>
 		</>
 	);
 };
+
+const StyledMain = styled(Main)`
+	height: max-content;
+`;
 
 export const PageDivision = styled.div`
 	display: flex;
@@ -63,5 +63,9 @@ const PageDivision2 = styled.div`
 	height: 90vh;
 	width: 40vw;
 	position: sticky;
+`;
+
+const Wrap = styled.div`
+	height: max-content;
 `;
 export default Home;
