@@ -2,16 +2,19 @@ import styled from "styled-components";
 import { FaBaby } from "react-icons/fa";
 import { useContext } from "react";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
+import { Link } from "react-router-dom";
 
 const ProfilePreview = () => {
-	const {currentUser} = useContext(CurrentUserContext)
+	const { currentUser } = useContext(CurrentUserContext);
 	return (
 		<PreviewDiv>
 			<PicDiv>
-				<PreviewProfPic
-					alt="Profile Photo"
-					src={currentUser.avatarSrc}
-				/>
+				<Link to={`/users/${currentUser.id}`}>
+					<PreviewProfPic
+						alt="Profile Photo"
+						src={currentUser.avatarSrc}
+					/>
+				</Link>
 			</PicDiv>
 			<FollowDiv>
 				<p>Followers</p>
@@ -69,7 +72,7 @@ const PreviewDiv = styled.div`
 	height: max-content;
 	background: var(--color-element-background);
 	justify-content: flex-start;
-	margin: 80px 50px;
+	margin: 50px 50px;
 	border-radius: 20px;
 	box-shadow: 2px 5px 16px 0px var(--color-element-background);
 	padding: 30px;

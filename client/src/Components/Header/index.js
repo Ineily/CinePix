@@ -10,7 +10,7 @@ const Header = () => {
 			<GradientDiv>
 				<LogoSearchWrapper>
 					<NavLink to="/home">
-						<h1>Twinema</h1>
+						<h1>CinePix</h1>
 					</NavLink>
 					<SearchBar />
 				</LogoSearchWrapper>
@@ -28,7 +28,7 @@ const gradientAnimation = keyframes`
 }
 `;
 
-const GradientDiv = styled.div`
+export const GradientDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -42,7 +42,7 @@ const GradientDiv = styled.div`
 	);
 	background-size: 300%;
 	background-position: left;
-	animation: ${gradientAnimation} 6s infinite alternate;
+	animation: ${gradientAnimation} 8s infinite alternate;
 
 	h1 {
 		color: var(--color-element-headline);

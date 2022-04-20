@@ -29,7 +29,13 @@ const handleSignIn = async (req, res) => {
 			  })
 			: res.status(200).json({
 					status: 200,
-					data: { id: result._id, name: result.name, avatarSrc: result.avatarSrc, followers: result.followers, following: result.following },
+					data: {
+						id: result._id,
+						name: result.name,
+						avatarSrc: result.avatarSrc,
+						followers: result.followers,
+						following: result.following,
+					},
 					message: "User Logged In",
 			  });
 	} catch (err) {

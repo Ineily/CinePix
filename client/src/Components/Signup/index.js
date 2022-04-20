@@ -7,17 +7,17 @@ import { ErrorDiv } from "../Login";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
 
 const Signup = () => {
-	let {setCurrentUser} = useContext(CurrentUserContext)
+	let { setCurrentUser } = useContext(CurrentUserContext);
 	const history = useHistory();
-	const [subState, setSubState] = useState("idle")
-	const [userInput, setUserInput]=useState({
+	const [subState, setSubState] = useState("idle");
+	const [userInput, setUserInput] = useState({
 		firstName: "",
 		lastName: "",
 		email: "",
 		username: "",
 		password: "",
 		password2: "",
-	})
+	});
 
 	const [errorMsg, setErrorMsg] = useState("");
 
@@ -25,34 +25,41 @@ const Signup = () => {
 		e.preventDefault();
 		setSubState("loading");
 		if (userInput.password !== userInput.password2) {
-			setErrorMsg("Passwords do not match. Please try again.")
-			setSubState("Error")
-			return
+			setErrorMsg("Passwords do not match. Please try again.");
+			setSubState("Error");
+			return;
 		} else {
-		fetch("/register", {
-			method: "POST",
-			body: JSON.stringify(userInput),
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((json) => {
-				console.log("response: ", json);
-				if (json.status === 200) {
-					setSubState("Success");
-					setCurrentUser({ id: json.data.id, firstName: json.data.firstName, lastName: json.data.lastName, avatarSrc: json.data.avatarSrc, followers: json.data.followers, following: json.data.following})
-				}
-				{
-					setSubState("Error")
-					setErrorMsg(json.message);
-				}
+			fetch("/register", {
+				method: "POST",
+				body: JSON.stringify(userInput),
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
 			})
-			.catch((err) => {
-				console.log("Error:", err);
-			});
-		};
+				.then((res) => res.json())
+				.then((json) => {
+					if (json.status === 200) {
+						setSubState("Success");
+						setCurrentUser({
+							id: json.data.id,
+							firstName: json.data.firstName,
+							lastName: json.data.lastName,
+							avatarSrc: json.data.avatarSrc,
+							followers: json.data.followers,
+							following: json.data.following,
+						});
+						history.push("/home");
+					}
+					{
+						setSubState("Error");
+						setErrorMsg(json.message);
+					}
+				})
+				.catch((err) => {
+					console.log("Error:", err);
+				});
+		}
 	};
 
 	const handleCancel = (e) => {
@@ -65,7 +72,7 @@ const Signup = () => {
 			password: "",
 			password2: "",
 		});
-		history.push("/")
+		history.push("/");
 	};
 
 	return (
@@ -76,70 +83,91 @@ const Signup = () => {
 				<FormDiv>
 					<SignupForm id="signup-form" onSubmit={handleSignup}>
 						<label>First Name</label>
-						<input className="register-input" placeholder="First Name" required onChange={(e) => {
-									setUserInput({
-										...userInput,
-										firstName: e.target.value,
-									})
-									}}></input>
+						<input
+							className="register-input"
+							placeholder="First Name"
+							required
+							onChange={(e) => {
+								setUserInput({
+									...userInput,
+									firstName: e.target.value,
+								});
+							}}
+						></input>
 						<label>Last Name</label>
-						<input className="register-input" placeholder="Last Name" required onChange={(e) => {
-									setUserInput({
-										...userInput,
-										lastName: e.target.value,
-									})
-									}}></input>
+						<input
+							className="register-input"
+							placeholder="Last Name"
+							required
+							onChange={(e) => {
+								setUserInput({
+									...userInput,
+									lastName: e.target.value,
+								});
+							}}
+						></input>
 						<label>E-mail</label>
 						<input
 							className="register-input"
 							type="email"
-							placeholder="E-mail address" required
+							placeholder="E-mail address"
+							required
 							onChange={(e) => {
 								setUserInput({
 									...userInput,
 									email: e.target.value,
-								})
-								}}></input>
+								});
+							}}
+						></input>
 						<label>Create a Username</label>
-						<input 
-						className="register-input"
-						placeholder="Username" 
-						required 
-						onChange={(e) => {
-									setUserInput({
-										...userInput,
-										username: e.target.value,
-									})
-									}}></input>
+						<input
+							className="register-input"
+							placeholder="Username"
+							required
+							onChange={(e) => {
+								setUserInput({
+									...userInput,
+									username: e.target.value,
+								});
+							}}
+						></input>
 						<Labelwrap>
-						<label>Create a Password</label>
-												</Labelwrap>
-							<input
-								className="register-input"
-								type="password"
-								placeholder="Password" required
-								onChange={(e) => {
-									setUserInput({
-										...userInput,
-										password: e.target.value,
-									})
-									}}></input>
+							<label>Create a Password</label>
+						</Labelwrap>
+						<input
+							className="register-input"
+							type="password"
+							placeholder="Password"
+							required
+							onChange={(e) => {
+								setUserInput({
+									...userInput,
+									password: e.target.value,
+								});
+							}}
+						></input>
 						<label>Verify Password</label>
-						<input className="register-input" type="password" placeholder="Re-type Password" required
-						onChange={(e) => {
-							setUserInput({
-								...userInput,
-								password2: e.target.value,
-							})
-							}}></input>
-							<ErrorDiv subState={subState} >{errorMsg}</ErrorDiv>
+						<input
+							className="register-input"
+							type="password"
+							placeholder="Re-type Password"
+							required
+							onChange={(e) => {
+								setUserInput({
+									...userInput,
+									password2: e.target.value,
+								});
+							}}
+						></input>
+						<ErrorDiv subState={subState}>{errorMsg}</ErrorDiv>
 						<Btnwrap>
-						<button type="submit" onClick={handleSignup}>Register</button>
-						<Cancel onClick={handleCancel}>Cancel</Cancel>
+							<button type="submit" onClick={handleSignup}>
+								Register
+							</button>
+							<Cancel onClick={handleCancel}>Cancel</Cancel>
 						</Btnwrap>
 					</SignupForm>
 				</FormDiv>
-
 			</SignupWrapper>
 		</>
 	);
@@ -157,43 +185,23 @@ const SignupWrapper = styled.div`
 `;
 
 const Labelwrap = styled.div`
-display: flex;
-justify-content: space-between;
-width: 325px;
-padding: 0 20px 0 0;
-color: var(--color-element-headline);
-cursor: pointer;
-position: relative;
-`
+	display: flex;
+	justify-content: space-between;
+	width: 325px;
+	padding: 0 20px 0 0;
+	color: var(--color-element-headline);
+	cursor: pointer;
+	position: relative;
+`;
 const Btnwrap = styled.div`
-display: flex;
-justify-content: space-between;
-padding: 0;
-width: 325px;
-color: var(--color-element-headline);
-cursor: pointer;
-position: relative;
-`
-
-// .requirements::before,
-// .requirements::after {
-// 	--scale: 0;
-	
-// 	position: absolute;
-// 	transform: translateX(-30%) translateY(-110%);
-// }
-
-// .requirements::before {
-// 	padding: .5rem;
-// 	background: black;
-// 	width: max-content;
-// 	content: attr(data-tooltip);
-// 	max-width: 100%;
-// 	border-radius: 5px;
-// 	background: var(--color-element-background);
-// 	color: var(--color-element-headline);
-// 	text-align: center;
-// }`
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	width: 325px;
+	color: var(--color-element-headline);
+	cursor: pointer;
+	position: relative;
+`;
 
 const SignupForm = styled.form`
 	display: flex;
@@ -236,16 +244,16 @@ const SignupForm = styled.form`
 `;
 
 const Cancel = styled.button`
-width: 150px;
-		height: 60px;
-		margin: 10px;
-		outline: none;
-		border: none;
-		border-radius: 10px;
-		background: var(--color-element-highlight);
-		font-size: 20px;
-		font-weight: bold;
-		color: var(--color-element-background);
-		cursor: pointer;
-`
+	width: 150px;
+	height: 60px;
+	margin: 10px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	background: var(--color-element-highlight);
+	font-size: 20px;
+	font-weight: bold;
+	color: var(--color-element-background);
+	cursor: pointer;
+`;
 export default Signup;

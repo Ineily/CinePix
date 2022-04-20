@@ -1,34 +1,33 @@
 import { PicDiv, PreviewProfPic } from "./ProfilePreview";
 import styled from "styled-components";
-const ReviewPreview = (movieReviews) => {
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+const ReviewPreview = ({ id, review, title, poster_path }) => {
+	const [avatarSrc, setAvatarSrc] = useState("");
+
+	useEffect(() => {
+		fetch(`/users/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setAvatarSrc(data.data.avatarSrc);
+			})
+			.catch((err) => console.log("Error: ", err));
+	}, [id]);
+
 	return (
 		<PreviewWrap>
 			<PicDiv className="profile">
-				<PreviewProfPic
-					alt="Profile Picture"
-					src="/assets/Kay-Bridges.jpg"
-				/>
+				<Link to={`users/${id}`}>
+					<PreviewProfPic alt="Profile Picture" src={avatarSrc} />
+				</Link>
 			</PicDiv>
 			<PreviewReviewWrap>
 				<PosterPicWrap>
-					<img
-						alt="Movie Poster"
-						src="https://image.tmdb.org/t/p/w92/wVYREutTvI2tmxr6ujrHT704wGF.jpg"
-					/>
+					<img alt="Movie Poster" src={poster_path} />
+					<h3>{title}</h3>
 				</PosterPicWrap>
 				<TitleReviewWrap>
-					<h3>The Conjuring</h3>
-					<Review>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore
-						magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea
-						commodo consequat. Duis aute irure dolor in
-						reprehenderit in voluptate velit esse cillum dolore eu
-						fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-						non proident, sunt in culpa qui officia deserunt mollit
-						anim id est laborum.
-					</Review>
+					<Review>{review}</Review>
 				</TitleReviewWrap>
 			</PreviewReviewWrap>
 			<AddBtn>Add to Watchlist</AddBtn>
@@ -40,10 +39,9 @@ const PreviewWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
 	height: max-content;
 	background: var(--color-element-background);
-	justify-content: flex-start;
+	justify-content: center;
 	margin: 50px;
 	border-radius: 20px;
 	box-shadow: 2px 5px 16px 0px var(--color-element-background);
@@ -56,26 +54,31 @@ const PreviewWrap = styled.div`
 
 const PosterPicWrap = styled.div`
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	border-radius: 10px;
 	overflow: hidden;
 	width: max-content;
 	height: max-content;
-	margin: 20px;
+	margin: 10px;
+	img {
+		border-radius: 10px;
+	}
 `;
 const PreviewReviewWrap = styled.div`
 	display: flex;
+	align-items: center;
+	flex-direction: column;
 	border-radius: 10px;
 	width: 100%;
 	height: max-content;
 	margin: 40px 0;
-	padding: 0 20px;
+	padding: 10px;
 	background: var(--color-illustration-secondary);
 
 	h3 {
 		color: var(--color-element-background);
-		font-size: 25px;
-		padding: 1rem;
+		font-size: 20px;
+		padding: 0.5rem;
 		font-style: italic;
 	}
 `;
@@ -87,6 +90,8 @@ const TitleReviewWrap = styled.div`
 `;
 
 const Review = styled.div`
+	display: flex;
+	justify-content: center;
 	width: 100%;
 	height: max-content;
 	background: var(--color-element-headline);

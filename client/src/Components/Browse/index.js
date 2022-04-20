@@ -6,6 +6,7 @@ import ResultsGrid from "./ResultsGrid";
 import { SearchContext } from "../SearchResults/SearchContext";
 import { useContext } from "react";
 import LoadAnimation from "../LoadAnimation";
+import Footer from "../Footer";
 
 const Browse = () => {
 	const { searchResults, setSearchResults } = useContext(SearchContext);
@@ -21,13 +22,11 @@ const Browse = () => {
 		fetch(`/moviesbygenre/${genreId}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data: ", data);
 				if (data.status === 200) {
 					setSearchResults(data.data.results);
 					setDisplayFlag(true);
 					setState("idle");
 					setCurrentPage(data.data.page);
-					console.log("currentPage: ", currentPage);
 				}
 				{
 					setState("error");
@@ -103,7 +102,9 @@ const Browse = () => {
 					</ButtonWrap>
 				</StyledPageDivision>
 				{state === "loading" ? (
-					<LoadAnimation />
+					<Loadwrap>
+						<StyledLoadAnimation />
+					</Loadwrap>
 				) : (
 					<PaginationReorder>
 						<InstructionDiv displayFlag={displayFlag}>
@@ -124,9 +125,14 @@ const Browse = () => {
 					</PaginationReorder>
 				)}
 			</Wrapper>
+			<Footer />
 		</>
 	);
 };
+
+const StyledLoadAnimation = styled(LoadAnimation)`
+	margin: auto;
+`;
 const PaginationDiv = styled.div`
 	display: flex;
 	width: 80%;
@@ -155,10 +161,12 @@ const PaginationDiv = styled.div`
 const PaginationReorder = styled.div`
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 20px;
 `;
 
 const Wrapper = styled.div`
-	display: ${(props) => (props.state === "loading" ? "none" : "flex")};
+	min-height: 100vh;
+	display: flex;
 `;
 
 const StyledPageDivision = styled(PageDivision)`
@@ -203,5 +211,12 @@ const ButtonWrap = styled.div`
 			color: var(--color-element-background);
 		}
 	}
+`;
+const Loadwrap = styled.div`
+	width: 90vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 `;
 export default Browse;

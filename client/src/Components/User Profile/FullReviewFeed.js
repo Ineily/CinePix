@@ -12,6 +12,7 @@ const FullReviewFeed = ({ id, firstName, reviews, status }) => {
 				return (
 					<FullReviewPreview
 						firstName={firstName}
+						key={review.id}
 						userId={review.id}
 						review={review.review}
 						title={review.title}

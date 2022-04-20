@@ -5,6 +5,7 @@ import { Main } from "../LandingPage";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Footer from "../Footer";
 
 const Login = () => {
 	const [userInput, setUserInput] = useState({ userName: "", password: "" });
@@ -26,7 +27,6 @@ const Login = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				console.log("response: ", json);
 				if (json.status === 200) {
 					setSubState("Success");
 					setCurrentUser({
@@ -86,6 +86,7 @@ const Login = () => {
 					</FormDiv>
 				</SignInWrap>
 			</Main>
+			<Footer />
 		</>
 	);
 };

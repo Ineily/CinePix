@@ -40,7 +40,7 @@ const SearchBar = () => {
 			<div className="search-input">
 				<input
 					className="search-field"
-					placeholder="Search Here"
+					placeholder="Search Movies By Title"
 					onKeyUp={handleKeyPress}
 				></input>
 				<span onClick={handleClear}></span>
