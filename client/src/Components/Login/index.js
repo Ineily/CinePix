@@ -29,7 +29,14 @@ const Login = () => {
 				console.log("response: ", json);
 				if (json.status === 200) {
 					setSubState("Success");
-					setCurrentUser({ id: json.data.id, firstName: json.data.firstName, lastName: json.data.lastName, avatarSrc: json.data.avatarSrc, followers: json.data.followers, following: json.data.following});
+					setCurrentUser({
+						id: json.data.id,
+						firstName: json.data.firstName,
+						lastName: json.data.lastName,
+						avatarSrc: json.data.avatarSrc,
+						followers: json.data.followers,
+						following: json.data.following,
+					});
 					history.push("/home");
 				}
 				{
@@ -71,7 +78,7 @@ const Login = () => {
 							/>
 							<ErrorDiv subState={subState}>{errorMsg}</ErrorDiv>
 							<SignupDiv>
-								Not yet a member?{" "}
+								Not a member yet?{" "}
 								<Link to="/register">Register here!</Link>
 							</SignupDiv>
 							<button type="submit">Log In</button>

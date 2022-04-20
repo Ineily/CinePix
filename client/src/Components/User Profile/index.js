@@ -5,14 +5,15 @@ import styled from "styled-components";
 import { FollowDiv, SocialsNums } from "../Home/ProfilePreview";
 import { PageDivision } from "../Home";
 import FullReviewFeed from "./FullReviewFeed";
+import LoadAnimation from "../LoadAnimation";
 
 const UserProfile = () => {
 	const { id } = useParams();
-	const [userDetails, setUserDetails] = useState({movieReviews: []});
+	const [userDetails, setUserDetails] = useState({ movieReviews: [] });
 	const [status, setStatus] = useState("idle");
 	const [followersNum, setFollowersNum] = useState(0);
 	const [followingNum, setFollowingNum] = useState(0);
-	
+
 	useEffect(() => {
 		setStatus("loading");
 		fetch(`/users/${id}`)
@@ -26,47 +27,46 @@ const UserProfile = () => {
 			.catch((err) => console.log("Error: ", err));
 	}, [id]);
 
-	// useEffect(() => {
-	// fetch(`/movies/${userDetails.movieReviews[i].id}`)
-	// .then((res) => res.json())
-	// .then((data) => {
-	//   console.log("data: ", data);
-	// })
-	// .catch((err) => {
-	//   console.log("Error:", err);
-	// })
-	// }, []);
-
-
+	console.log("userDetails: ", userDetails);
 	return (
 		<>
 			<Header />
 			{status === "loading" ? (
-				<div>"Loading"</div>
+				<LoadAnimation />
 			) : (
 				<>
 					<ProfileWrap>
 						<PageDivision>
-						<DetailsDiv>
-							<ProfilePic
-								alt="Profile Picture"
-								src={userDetails.avatarSrc}
-							/>
-							<NameDiv><p>{userDetails.firstName} {userDetails.lastName}</p></NameDiv>
-							<StyledFollowDiv>
-								<p>Followers</p>
-								<p>Following</p>
-							</StyledFollowDiv>
-							<SocialsNums>
-								<p>{followersNum}</p>
-								<p>|</p>
-								<p>{followingNum}</p>
-							</SocialsNums>
-							<BioDiv>{userDetails.bio}</BioDiv>
-						</DetailsDiv>
+							<DetailsDiv>
+								<ProfilePic
+									alt="Profile Picture"
+									src={userDetails.avatarSrc}
+								/>
+								<NameDiv>
+									<p>
+										{userDetails.firstName}{" "}
+										{userDetails.lastName}
+									</p>
+								</NameDiv>
+								<StyledFollowDiv>
+									<p>Followers</p>
+									<p>Following</p>
+								</StyledFollowDiv>
+								<SocialsNums>
+									<p>{followersNum}</p>
+									<p>|</p>
+									<p>{followingNum}</p>
+								</SocialsNums>
+								<BioDiv>{userDetails.bio}</BioDiv>
+							</DetailsDiv>
 						</PageDivision>
 						<StyledPageDiv>
-						<FullReviewFeed status={status} reviews={userDetails.movieReviews} firstName={userDetails.firstName}/>
+							<FullReviewFeed
+								id={id}
+								status={status}
+								reviews={userDetails.movieReviews}
+								firstName={userDetails.firstName}
+							/>
 						</StyledPageDiv>
 					</ProfileWrap>
 				</>
@@ -76,20 +76,20 @@ const UserProfile = () => {
 };
 
 const ProfileWrap = styled.div`
-display: flex;
+	display: flex;
 `;
 
 const StyledPageDiv = styled(PageDivision)`
-width: 60vw;
-`
+	width: 60vw;
+`;
 const NameDiv = styled.div`
-width: max-content;
-padding: 15px 15px 0 15px;;
-color: var(--color-illustration-secondary)
-`
+	width: max-content;
+	padding: 15px 15px 0 15px;
+	color: var(--color-illustration-secondary);
+`;
 const DetailsDiv = styled.div`
 	background: var(--color-element-background);
-	width: 375px;
+	width: 350px;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
@@ -99,6 +99,7 @@ const DetailsDiv = styled.div`
 	box-shadow: 2px 5px 16px 0px var(--color-element-background);
 	z-index: 50;
 	height: max-content;
+	position: fixed;
 `;
 const StyledFollowDiv = styled(FollowDiv)`
 	display: flex;

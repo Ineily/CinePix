@@ -5,7 +5,7 @@ export const SearchContext = createContext(null);
 const SearchProvider = ({ children }) => {
 	const [searchResults, setSearchResults] = usePersistedState(
 		"Search Results",
-		{}
+		[]
 	);
 	return (
 		<SearchContext.Provider value={{ searchResults, setSearchResults }}>

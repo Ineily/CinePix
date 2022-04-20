@@ -8,7 +8,7 @@ const CurrentFilmProvider = ({ children }) => {
 		title: null,
 		poster_path: "",
 		genres: [],
-		following: []
+		homepage: null 
 	});
 	return (
 		<CurrentFilmContext.Provider value={{ currentFilm, setCurrentFilm }}>
