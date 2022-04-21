@@ -16,7 +16,9 @@ const LandingPage = () => {
 							cinephiles. <Link to="/register">Register</Link>{" "}
 							today -- Here, everyone's a critic.
 						</p>
-						<p>Already a member? Log In Below!</p>
+						<p className={"small"}>
+							Already a member? Log In Below!
+						</p>
 						<Link to="/login">
 							<button>Log In</button>
 						</Link>
@@ -87,15 +89,19 @@ const WelcomeDiv = styled.div`
 		padding: 20px;
 		color: var(--color-illustration-secondary);
 	}
+	.small {
+		font-size: 20px;
+	}
 	button {
 		cursor: pointer;
+		width: 175px;
 		background: var(--color-element-background);
 		color: var(--color-illustration-secondary);
 		padding: 10px;
 		border: 3px solid var(--color-illustration-secondary);
 		font-family: "Poppins", sans-serif;
 		font-size: 30px;
-		border-radius: 20px;
+		border-radius: 30px;
 		margin: 0 20px;
 		&:hover {
 			color: var(--color-illustration-tertiary);
