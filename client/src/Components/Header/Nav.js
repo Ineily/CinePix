@@ -215,6 +215,7 @@ const StyledLink = styled(Link)`
 const StyledDiv = styled.div`
 	color: var(--color-element-headline);
 	text-decoration: none;
+	cursor: pointer;
 	&:hover {
 		color: var(--color-illustration-highlight);
 	}
