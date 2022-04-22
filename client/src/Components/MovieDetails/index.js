@@ -10,7 +10,7 @@ import Footer from "../Footer";
 
 const MovieDetails = () => {
 	const { id } = useParams();
-
+	//base URL for the API call
 	const baseUrl = "http://image.tmdb.org/t/p/w154";
 
 	const [filmDetails, setFilmDetails] = useState({
@@ -18,8 +18,9 @@ const MovieDetails = () => {
 		genres: [],
 	});
 	const [state, setState] = useState("idle");
-
+	//take the year from the way the release date is formatted in API response
 	const year = filmDetails.release_date.slice(0, 4);
+
 	useEffect(() => {
 		setState("loading");
 		fetch(`/movies/${id}`)
@@ -32,7 +33,7 @@ const MovieDetails = () => {
 	}, [id]);
 
 	let history = useHistory();
-
+	//save film to be reviewed in state
 	const { setCurrentFilm } = useContext(CurrentFilmContext);
 
 	const startReview = (e) => {

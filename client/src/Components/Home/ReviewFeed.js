@@ -3,7 +3,6 @@ import ReviewPreview from "./ReviewPreview";
 import { useContext } from "react";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
 import { UsersContext } from "./UsersContext";
-import Footer from "../Footer";
 
 const ReviewFeed = () => {
 	const { users } = useContext(UsersContext);
@@ -13,7 +12,6 @@ const ReviewFeed = () => {
 	let filteredUsers = users.filter((user) => {
 		return currentUser.following.includes(user._id);
 	});
-	console.log("filteredUsers: ", filteredUsers);
 	let movieReviewArray = filteredUsers.map((user) => {
 		return user.movieReviews;
 	});

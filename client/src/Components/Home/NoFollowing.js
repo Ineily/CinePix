@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-const NoFollowing = () => {
+const NoFollowing = ({ children }) => {
 	return (
-		<Wrapper>
-			Looks like you haven't added any friends yet. Check out the list of
-			suggested friends to see if there are any familiar faces.
+		<Wrapper
+			children="Looks like you haven't added any friends yet. Check out the list of
+		suggested friends to see if there are any familiar faces."
+		>
+			{children}
 		</Wrapper>
 	);
 };

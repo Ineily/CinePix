@@ -8,9 +8,11 @@ import { Link } from "react-router-dom";
 import Footer from "../Footer";
 
 const Login = () => {
+	//set user's input for post to server
 	const [userInput, setUserInput] = useState({ userName: "", password: "" });
 	const { setCurrentUser } = useContext(CurrentUserContext);
 	const [subState, setSubState] = useState("Idle");
+	//error message for response from server
 	const [errorMsg, setErrorMsg] = useState("");
 	let history = useHistory();
 
