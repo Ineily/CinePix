@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import FullReviewPreview from "./FullReviewPreview";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
-const FullReviewFeed = ({ id, firstName, reviews, status }) => {
+const FullReviewFeed = ({ firstName, reviews }) => {
 	const { currentUser } = useContext(CurrentUserContext);
 
 	return (
@@ -12,7 +12,7 @@ const FullReviewFeed = ({ id, firstName, reviews, status }) => {
 				return (
 					<FullReviewPreview
 						firstName={firstName}
-						key={review.id}
+						key={review.reviewId}
 						userId={review.id}
 						review={review.review}
 						title={review.title}

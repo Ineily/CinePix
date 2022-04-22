@@ -12,14 +12,13 @@ import Footer from "../Footer";
 
 const Home = () => {
 	const { currentUser } = useContext(CurrentUserContext);
-	const { users, setUsers } = useContext(UsersContext);
-	const [suggested, setSuggested] = useState([]);
+	//user context to display review and suggested friends feeds
+	const { setUsers } = useContext(UsersContext);
 
 	useEffect(() => {
 		fetch(`/get-users`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setUsers(data.data);
 			})
 			.catch((err) => console.log("Error: ", err));

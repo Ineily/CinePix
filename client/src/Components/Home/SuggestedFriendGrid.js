@@ -8,13 +8,14 @@ import SuggestedFriend from "./SuggestedFriend";
 const SuggestedFriendGrid = () => {
 	const { users } = useContext(UsersContext);
 	const { currentUser } = useContext(CurrentUserContext);
+	//filter to only include users current user does not follow
 	let notFollowingPlusSelf = users.filter((user) => {
 		return !currentUser.following.includes(user._id);
 	});
+	//remove self from resulting list
 	let notFollowing = notFollowingPlusSelf.filter(
 		(user) => user._id !== currentUser.id
 	);
-	console.log("notFollowing: ", notFollowing);
 
 	return (
 		<Wrapper>

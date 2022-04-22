@@ -6,10 +6,12 @@ import { CurrentUserContext } from "../Login/CurrentUserContext";
 import { useHistory } from "react-router-dom";
 
 const Review = () => {
+	//film to be reviewed is saved in state
 	const { currentFilm } = useContext(CurrentFilmContext);
 	const { currentUser } = useContext(CurrentUserContext);
 	const [reviewInput, setReviewInput] = useState("");
 	const [message, setMessage] = useState("");
+	//display of server response - needs more work, but should display response prior to redirecting with setTimeout
 	const [gotResponse, setGotResponse] = useState(false);
 	let history = useHistory();
 	let requestBody = {
