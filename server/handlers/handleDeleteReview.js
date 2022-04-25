@@ -20,19 +20,32 @@ const handleDeleteReview = async (req, res) => {
 
 	try {
 		await client.connect();
-		let user = await db.collection("users").updateOne(
-			{ _id: userId },
-			{
-				$pull: {
-					movieReviews: { $elemMatch: { reviewId: reviewId } },
-				},
-			}
-		);
-		res.status(200).json({
-			status: 200,
-			data: user.movieReviews,
-			message: "Record Updated",
-		});
+		let user = await db.collection("users").findOne({ _id: userId });
+		if (!user) {
+			res.status(404).json({
+				status: 404,
+				data: userId,
+				message: "Resource not found. Please try again.",
+			});
+		} else {
+			let reviewArr = user.movieReviews;
+			let updatedMovieReviewsArr = reviewArr.filter((review) => {
+				return review.reviewId !== reviewId;
+			});
+			await db.collection("users").updateOne(
+				{ _id: userId },
+				{
+					$set: {
+						movieReviews: updatedMovieReviewsArr,
+					},
+				}
+			);
+			res.status(200).json({
+				status: 200,
+				data: user.movieReviews,
+				message: "Record Updated",
+			});
+		}
 	} catch (err) {
 		res.status(500).json({
 			status: 500,

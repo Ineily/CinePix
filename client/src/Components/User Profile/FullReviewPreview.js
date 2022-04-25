@@ -12,12 +12,27 @@ const FullReviewPreview = ({
 	poster,
 	genres,
 	firstName,
+	setUserDetails,
+	setFollowersNum,
+	setFollowingNum,
+	setStatus,
 }) => {
 	const requestBody = {
 		userId: userId,
 		reviewId: reviewId,
 	};
 
+	const fetchAfterDelete = () => {
+		fetch(`/users/${userId}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setUserDetails(data.data);
+				setFollowersNum(data.data.followers.length);
+				setFollowingNum(data.data.following.length);
+				setStatus("idle");
+			})
+			.catch((err) => console.log("Error: ", err));
+	};
 	const handleDelete = (e) => {
 		e.preventDefault();
 		fetch("/delete-review", {
@@ -30,7 +45,11 @@ const FullReviewPreview = ({
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				console.log("response: ", json);
+				if (json.status === 200) {
+					fetchAfterDelete();
+				} else {
+					window.alert(json.message);
+				}
 			})
 			.catch((err) => {
 				console.log("Error:", err);

@@ -85,6 +85,10 @@ const UserProfile = () => {
 								status={status}
 								reviews={userDetails.movieReviews}
 								firstName={userDetails.firstName}
+								setUserDetails={setUserDetails}
+								setFollowersNum={setFollowersNum}
+								setFollowingNum={setFollowingNum}
+								setStatus={setStatus}
 							/>
 						</StyledPageDiv>
 					</ProfileWrap>

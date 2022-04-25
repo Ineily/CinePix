@@ -2,7 +2,14 @@ import styled from "styled-components";
 import FullReviewPreview from "./FullReviewPreview";
 import { useContext } from "react";
 import { CurrentUserContext } from "../Login/CurrentUserContext";
-const FullReviewFeed = ({ firstName, reviews }) => {
+const FullReviewFeed = ({
+	firstName,
+	reviews,
+	setUserDetails,
+	setFollowersNum,
+	setFollowingNum,
+	setStatus,
+}) => {
 	const { currentUser } = useContext(CurrentUserContext);
 
 	return (
@@ -21,6 +28,10 @@ const FullReviewFeed = ({ firstName, reviews }) => {
 						genres={review.genres}
 						currentUser={currentUser}
 						reviewId={review.reviewId}
+						setUserDetails={setUserDetails}
+						setFollowersNum={setFollowersNum}
+						setFollowingNum={setFollowingNum}
+						setStatus={setStatus}
 					/>
 				);
 			})}
