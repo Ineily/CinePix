@@ -35,6 +35,7 @@ const FullReviewPreview = ({
 	};
 	const handleDelete = (e) => {
 		e.preventDefault();
+		setStatus("loading");
 		fetch("/delete-review", {
 			method: "PUT",
 			body: JSON.stringify(requestBody),

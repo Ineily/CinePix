@@ -21,9 +21,14 @@ const UserProfile = () => {
 	const [followersNum, setFollowersNum] = useState(0);
 	//set # to display following array length in profile preview
 	const [followingNum, setFollowingNum] = useState(0);
-	let { currentUser } = useContext(CurrentUserContext);
-	//if current user doesn't follow, need add button
+	let { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+	//if current user doesn't follow (and is not current user), need add button
 	let doesCurrentUserFollow = currentUser.following.includes(id);
+	//request body for the handle add function
+	const requestBody = {
+		friendId: id,
+		currentUserId: currentUser.id,
+	};
 
 	useEffect(() => {
 		setStatus("loading");
@@ -37,6 +42,52 @@ const UserProfile = () => {
 			})
 			.catch((err) => console.log("Error: ", err));
 	}, [id]);
+
+	const fetchAfterAdd = () => {
+		setStatus("loading");
+		fetch(`/users/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setUserDetails(data.data);
+				setFollowersNum(data.data.followers.length);
+				setFollowingNum(data.data.following.length);
+			})
+			.catch((err) => console.log("Error: ", err));
+		fetch(`/users/${currentUser.id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setCurrentUser({
+					...currentUser,
+					following: data.data.following,
+				});
+			})
+			.catch((err) => console.log("Error: ", err));
+	};
+	const handleAddFriend = (e) => {
+		e.preventDefault();
+		setStatus("loading");
+		fetch("/add-friend", {
+			method: "PUT",
+			body: JSON.stringify(requestBody),
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				if (json.status === 200) {
+					fetchAfterAdd();
+				} else {
+					window.alert(json.message);
+					setStatus("idle");
+				}
+			})
+			.catch((err) => {
+				console.log("Error:", err);
+				setStatus("error");
+			});
+	};
 
 	return (
 		<>
@@ -68,9 +119,19 @@ const UserProfile = () => {
 									<p>{followingNum}</p>
 								</SocialsNums>
 								<BioDiv>{userDetails.bio}</BioDiv>
-								{!doesCurrentUserFollow && (
-									<button>Add Friend</button>
-								)}
+								{!doesCurrentUserFollow &&
+									id !== currentUser.id && (
+										<button onClick={handleAddFriend}>
+											Add Friend
+										</button>
+									)}
+								{
+									//still need to add remove friend button functionality.
+									doesCurrentUserFollow &&
+										id !== currentUser.id && (
+											<button>Remove Friend</button>
+										)
+								}
 							</DetailsDiv>
 						</PageDivision>
 						<StyledPageDiv>

@@ -3,6 +3,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const { getUserById } = require("./handlers/getUserById");
+const { handleAdd } = require("./handlers/handleAdd");
 const { handleSearch } = require("./handlers/handleSearch");
 const { handleSignIn } = require("./handlers/handleSignIn");
 const { getMovieById } = require("./handlers/getMovieById");
@@ -42,4 +43,5 @@ express()
 	.post("/register", handleRegistration)
 	.put("/review", handleReviewPost)
 	.put("/delete-review", handleDeleteReview)
+	.put("/add-friend", handleAdd)
 	.listen(PORT, () => console.info(`Listening on port ${PORT}`));
